@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Textract</title>
+  <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+  <header>
+    <img src="../static/logo.png" style="width: 10%; height: 10%">
+  </header>
+  <main>
+    <form id="upload-form" action="{{ url_for('main') }}" method="post" enctype="multipart/form-data">
+      <label for="image-upload">Upload an image:</label>
+      <input type="file" id="image-upload" name="image" accept="image/*" required>
+      <button type="submit">Extract Text</button>
+    </form>
+    <div id="result">
+      <h2>Extracted Text:</h2>
+      <pre id="extracted-text">{{ extracted_text }}</pre>
+    </div>
+  </main>
+  <footer>
+    <p>&copy; 2024 aqui.ffoo</p>
+  </footer>
+</body>
+</html>
