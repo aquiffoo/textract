@@ -1,10 +1,9 @@
+import os
+import time
 import logging
 from flask import Flask, render_template, request, redirect, url_for
 from PIL import Image
 import pytesseract
-import os
-import time
-import platform
 import tempfile
 from apscheduler.schedulers.background import BackgroundScheduler
 
@@ -12,10 +11,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 upload_folder = tempfile.gettempdir()
 
-if platform.system() == "Windows":
-  pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
-else:
-  pytesseract.pytesseract.tesseract_cmd = "/usr/bin/tesseract"
+pytesseract.pytesseract.tesseract_cmd = os.environ.get('TESSERACT_CMD', 'tesseract')
 
 app = Flask(__name__)
 
@@ -47,7 +43,6 @@ def main():
         logging.error(f"Error processing image: {str(e)}")
         extracted_text = f"Error processing image: {str(e)}"
   return render_template("index.html", extracted_text=extracted_text)
-
 
 def delete_old():
   current_time = time.time()
