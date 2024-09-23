@@ -4,14 +4,25 @@ body {
   padding: 0;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 100dvh;
+  max-width: 560px;
+  margin: 0 auto;
 }
 
 header {
-  background-color: #dadada;
+  /* background-color: #dadada; */
   color: white;
   text-align: center;
-  padding: .5em 0;
+  padding: .8em 0;
+  max-height: 7rem;
+  overflow: hidden;
+}
+
+header img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 main {
@@ -26,12 +37,66 @@ form {
   margin: 0 auto;
 }
 
-label {
-  margin-bottom: 10px;
+.image-upload-drop {
+  position: relative;
+  margin-bottom: 2rem;
 }
 
-input[type="file"] {
-  margin-bottom: 20px;
+.image-upload-drop input {
+  display: block;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+}
+
+.image-upload-drop label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  border: dashed 3px #333;
+  border-radius: 0.125rem;
+  outline: 2px solid #1B1B1B;
+  outline-offset: 3px;
+  font-size: 1.3rem;
+  font-weight: 800;
+  padding: 2rem 2rem;
+  cursor: pointer;
+}
+
+.image-upload-drop .is-valid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-size: 1.3rem;
+  font-weight: 800;
+  background-color: #a3ff78;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 0.125rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: .21s ease-in;
+}
+
+.image-upload-drop input:valid + .is-valid {
+  opacity: 1;
+}
+
+.image-upload-drop label svg,
+.image-upload-drop .is-valid svg  {
+  width: 2.6rem;
+  height: 2.6rem;
 }
 
 p {
@@ -49,15 +114,22 @@ p {
 }
 
 button {
-  padding: 10px;
+  padding: 1rem 2rem;
   background-color: #000;
   color: white;
   border: none;
+  outline: 2px solid transparent;
   cursor: pointer;
+  font-family: inherit;
+  border-radius: 0.125rem;
+  font-size: 1.3rem;
+  font-weight: 800;
+  transition: .21s ease-out;
 }
 
 button:hover {
-  background-color: #000;
+  outline-color: #1B1B1B;
+  outline-offset: 3px;
 }
 
 #result {
