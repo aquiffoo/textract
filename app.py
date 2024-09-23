@@ -3,11 +3,16 @@ from PIL import Image
 import pytesseract
 import os
 import time
+import platform
+import tempfile
 from apscheduler.schedulers.background import BackgroundScheduler
 
-upload_folder = "uploads"
+upload_folder = tempfile.gettempdir()
 
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+if platform.system() == "Windows":
+  pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+else:
+  pytesseract.pytesseract.tesseract_cmd = "/usr/bin/tesseract"
 
 app = Flask(__name__)
 
@@ -29,6 +34,7 @@ def main():
       image_path = os.path.join(upload_folder, file.filename)
       file.save(image_path)
       extracted_text = textractor(image_path)
+      os.remove(image_path)
   return render_template("index.html", extracted_text=extracted_text)
 
 def delete_old():
