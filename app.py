@@ -51,8 +51,13 @@ def delete_old():
     if os.path.isfile(file_path):
       file_age = current_time - os.path.getctime(file_path)
       if file_age > 10:
-        os.remove(file_path)
-        print(f"{file_path} just got deleted XD")
+        try:
+          os.remove(file_path)
+          print(f"{file_path} just got deleted XD")
+        except PermissionError:
+          print(f"Could not delete {file_path}: File is in use")
+        except Exception as e:
+          print(f"Error deleting {file_path}: {str(e)}")
 
 if __name__ == "__main__":
   scheduler = BackgroundScheduler()
