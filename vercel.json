@@ -23,5 +23,6 @@
   },
   "env": {
     "TESSDATA_PREFIX": "/var/task/tessdata"
-  }
+  },
+  "buildCommand": "bash vercel-build.sh"
 }

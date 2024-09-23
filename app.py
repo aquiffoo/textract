@@ -1,3 +1,4 @@
+import logging
 from flask import Flask, render_template, request, redirect, url_for
 from PIL import Image
 import pytesseract
@@ -6,6 +7,8 @@ import time
 import platform
 import tempfile
 from apscheduler.schedulers.background import BackgroundScheduler
+
+logging.basicConfig(level=logging.DEBUG)
 
 upload_folder = tempfile.gettempdir()
 
@@ -17,9 +20,13 @@ else:
 app = Flask(__name__)
 
 def textractor(image_path):
-  image = Image.open(image_path)
-  text = pytesseract.image_to_string(image)
-  return text
+  try:
+    image = Image.open(image_path)
+    text = pytesseract.image_to_string(image)
+    return text
+  except Exception as e:
+    logging.error(f"Error in textractor: {str(e)}")
+    return f"Error: {str(e)}"
 
 @app.route("/", methods=["GET", "POST"])
 def main():
@@ -31,11 +38,16 @@ def main():
     if file.filename == "":
       return redirect(request.url)
     if file:
-      image_path = os.path.join(upload_folder, file.filename)
-      file.save(image_path)
-      extracted_text = textractor(image_path)
-      os.remove(image_path)
+      try:
+        image_path = os.path.join(upload_folder, file.filename)
+        file.save(image_path)
+        extracted_text = textractor(image_path)
+        os.remove(image_path)
+      except Exception as e:
+        logging.error(f"Error processing image: {str(e)}")
+        extracted_text = f"Error processing image: {str(e)}"
   return render_template("index.html", extracted_text=extracted_text)
+
 
 def delete_old():
   current_time = time.time()
