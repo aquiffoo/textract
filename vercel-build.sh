@@ -1,5 +1,4 @@
 #!/bin/bash
-
 apt-get update
 
 apt-get install -y tesseract-ocr libtesseract-dev
@@ -13,6 +12,5 @@ cp -r /usr/share/tesseract-ocr/4.00/tessdata/* /var/task/tessdata/ || cp -r /usr
 which tesseract
 tesseract --version
 
-python --version
-
 export TESSDATA_PREFIX=/var/task/tessdata
+echo "TESSDATA_PREFIX is set to $TESSDATA_PREFIX"
