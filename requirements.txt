@@ -1,5 +1,5 @@
 Flask==3.0.3
 Pillow==10.4.0
-easyocr==1.7.1
+pytesseract==0.3.10
 APScheduler==3.10.4
 gunicorn==23.0.0

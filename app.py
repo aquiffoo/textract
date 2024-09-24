@@ -3,7 +3,7 @@ import time
 import logging
 from flask import Flask, render_template, request, redirect, url_for
 from PIL import Image
-import easyocr
+import pytesseract
 import tempfile
 from apscheduler.schedulers.background import BackgroundScheduler
 
@@ -13,13 +13,10 @@ upload_folder = tempfile.gettempdir()
 
 app = Flask(__name__)
 
-# Initialize EasyOCR reader
-reader = easyocr.Reader(['en'])  # Initialize for English
-
 def textractor(image_path):
     try:
-        result = reader.readtext(image_path)
-        text = ' '.join([item[1] for item in result])
+        image = Image.open(image_path)
+        text = pytesseract.image_to_string(image)
         return text
     except Exception as e:
         logging.error(f"Error in textractor: {str(e)}")
