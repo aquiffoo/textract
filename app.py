@@ -62,6 +62,7 @@ def delete_old():
 if __name__ == "__main__":
   print(f"Tesseract command: {pytesseract.pytesseract.tesseract_cmd}")
   print(f"TESSDATA_PREFIX: {os.environ.get('TESSDATA_PREFIX')}")
+  pytesseract.pytesseract.tesseract_cmd = os.environ.get('TESSERACT_CMD', '/usr/local/bin/tesseract')
   scheduler = BackgroundScheduler()
   scheduler.add_job(func=delete_old, trigger="interval", minutes=.1)
   scheduler.start()
