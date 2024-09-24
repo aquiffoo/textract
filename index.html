@@ -4,14 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Textract</title>
-  <link rel="stylesheet" href="../static/style.css">
+  <link rel="stylesheet" href="style.css">
+  <script src='https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js'></script>
 </head>
 <body>
   <header>
-    <img src="../static/logo.png">
+    <img src="logo.png" alt="Textract Logo">
   </header>
   <main>
-    <form id="upload-form" action="{{ url_for('main') }}" method="post" enctype="multipart/form-data">
+    <form id="upload-form">
       <div class="image-upload-drop">
         <label for="image-upload">
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 4H8.8c-1.68 0-2.52 0-3.162.327a3 3 0 00-1.311 1.311C4 6.28 4 7.12 4 8.8v6.4c0 1.68 0 2.52.327 3.162a3 3 0 001.311 1.311C6.28 20 7.12 20 8.8 20h6.4c1.68 0 2.52 0 3.162-.327a3 3 0 001.311-1.311C20 17.72 20 16.88 20 15.2V11"/><path d="M4 16l4.293-4.293a1 1 0 011.414 0L13 15m0 0l2.793-2.793a1 1 0 011.414 0L20 15m-7 0l2.25 2.25M18 8V3m0 0l-2 2m2-2l2 2"/></g></svg>
@@ -29,11 +30,12 @@
     </form>
     <div id="result">
       <h2>Extracted Text:</h2>
-      <pre id="extracted-text">{{ extracted_text }}</pre>
+      <pre id="extracted-text"></pre>
     </div>
   </main>
   <footer>
     <p>&copy; 2024 aqui.ffoo</p>
   </footer>
+  <script src="script.js"></script>
 </body>
 </html>
