@@ -16,11 +16,6 @@
       "dest": "app.py"
     }
   ],
-  "build": {
-    "env": {
-      "PYTHONPATH": "/var/task"
-    }
-  },
   "env": {
     "TESSDATA_PREFIX": "/var/task/tessdata",
     "TESSERACT_CMD": "tesseract"
