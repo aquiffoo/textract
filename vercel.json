@@ -18,7 +18,7 @@
   ],
   "env": {
     "TESSDATA_PREFIX": "/var/task/tessdata",
-    "TESSERACT_CMD": "/usr/bin/tesseract"
+    "TESSERACT_CMD": "/usr/local/bin/tesseract"
   },
   "buildCommand": "bash vercel-build.sh"
 }
